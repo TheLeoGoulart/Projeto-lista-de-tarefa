@@ -1,1 +1,0 @@
-Os de verdade eu sei quem são
