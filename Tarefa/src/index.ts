@@ -7,7 +7,7 @@ let radioElementS = document.querySelector("#app input#sem_prazo") as HTMLInputE
 
 
 let listaSalva: string | null = localStorage.getItem("@listagem_tarefas");
-let tarefas: [string, number] = listaSalva !== null && JSON.parse(listaSalva) || [];
+let tarefas: string[] = listaSalva !== null && JSON.parse(listaSalva) || [];
 
 function listarTarefas(){
     listElement.innerHTML = "";
@@ -15,7 +15,7 @@ function listarTarefas(){
     tarefas.map (function (item, cont){
         const ant = cont - 1;
         if (item === " <URGENTE> "){  
-            document.getElementById(`${ant}`)!.style.color = "#f00";
+            document.getElementById(`${ant}`)!.style.color = "Red";
         } else if (item === " <ATENÇÂO> "){
             document.getElementById(`${ant}`)!.style.color = "rgba(233, 161, 6, 0.625)";
         } else if(item === " <SEM PRAZO> "){
@@ -23,8 +23,21 @@ function listarTarefas(){
         } else{
             let todoElement = document.createElement("li");
             todoElement.id = `${cont}`;
-            let tarefaText = document.createTextNode(<string>item);
+            let tarefaText = document.createTextNode(item);
+            
+            let linkElement = document.createElement("a");
+            linkElement.setAttribute("href", "#");
+
+            let posicao = tarefas.indexOf(item);
+
+            linkElement.setAttribute("onclick", `deletarTarefa(${posicao})`);
+            linkElement.setAttribute("style", "margin-left: 10px");
+
+            let linkTest = document.createTextNode("Excluir");
+            linkElement.appendChild(linkTest);
+
             todoElement.appendChild(tarefaText);
+            todoElement.appendChild(linkElement);
             listElement.appendChild(todoElement);
         }
     })
@@ -58,4 +71,11 @@ buttonElement.onclick = adicionarTarefa
 
 function salvarDados(){
     localStorage.setItem("@listagem_tarefas", JSON.stringify(tarefas));
+}
+
+function deletarTarefa(posicao: number){
+    tarefas.splice(posicao, 2);
+
+    listarTarefas();
+    salvarDados(); 
 }
