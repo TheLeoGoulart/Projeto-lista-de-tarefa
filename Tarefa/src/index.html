@@ -7,14 +7,26 @@
     <title>Minhas Tarefas</title>
 </head>
 <body>
-    <h1>Minhas Tarefas</h1>
+    <h1>Tarefas do dia</h1>
+    <h4>------------------//------------------</h4>
 
     <div id="app">
-        <ul>
-        </ul>
+        <p style="font-size: 16px;"><b>O que deve ser feito hoje?</b></p>
+        <input type="text" id="tarefa" placeholder="Digite uma Tarefa..." /><br>
 
-        <input type="text" placeholder="Digite uma Tarefa..." />
+        <p style="font-size: 16px;"><b>Qual a prioridade desta tarefa ?</b></p>
+        <input type="radio" id="urgente" name="prioridade">
+        <label for="urgente"><span style="color: #f00;"><b>Urgente</b></span></label><br>
+        <input type="radio" id="atencao" name="prioridade">
+        <label for="atencao"><span style="color: rgba(233, 161, 6, 0.625);"><b>Atenção</b></span></label><br>
+        <input type="radio" id="sem_prazo" name="prioridade" checked>
+        <label for="sem_prazo"><span style="color: rgb(15, 92, 21);"><b>Sem Pressa</b></span></label><br>
+
         <button>Adicionar</button>
+        <h4>------------------//------------------</h4>
+        
+        <b><ul>
+        </ul></b>
     </div>
 
     <script src="../build/index.js"></script>
